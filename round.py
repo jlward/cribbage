@@ -1,3 +1,4 @@
+import random
 from deck import Deck
 
 
@@ -17,6 +18,10 @@ class Round:
                 return True
         return False
 
+    def get_cut_card(self):
+        self.cut_card = random.choice(self.deck.cards)
+        self.deck.cards.remove(self.cut_card)
+
     def play_cards(self):
         while self.players_have_cards:
             count = 0
@@ -32,8 +37,13 @@ class Round:
                 if not card_played:
                     break
 
+    def print_players(self):
+        for player in self.players:
+            print(player)
+
     def score_hands(self):
-        pass
+        for player in self.players:
+            player.score_hand(self.cut_card)
 
     def count_crib(self):
         pass
@@ -48,6 +58,9 @@ class Round:
         for player in self.players:
             self.discard_to_crib(player)
 
+        self.get_cut_card()
         self.play_cards()
         self.score_hands()
+        self.print_players()
         self.count_crib()
+        self.print_players()
