@@ -8,8 +8,8 @@ class Game:
         self.players = []
 
     def create_players(self):
-        self.players.append(ComputerPlayer())
-        self.players.append(ComputerPlayer())
+        self.players.append(ComputerPlayer(name='Jason'))
+        self.players.append(ComputerPlayer(name='Zack'))
 
     def start_round(self):
         _round = Round(

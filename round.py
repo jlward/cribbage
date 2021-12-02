@@ -28,9 +28,15 @@ class Round:
                         continue
                     count += card.value
                     card_played = True
-                    print(card, count)
+                    print(player, card, count)
                 if not card_played:
                     break
+
+    def score_hands(self):
+        pass
+
+    def count_crib(self):
+        pass
 
     def start(self):
         print('Starting round')
@@ -41,6 +47,7 @@ class Round:
 
         for player in self.players:
             self.discard_to_crib(player)
-        print(self.crib)
 
         self.play_cards()
+        self.score_hands()
+        self.count_crib()

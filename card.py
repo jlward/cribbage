@@ -1,10 +1,22 @@
+face_map = {
+    1: 'A',
+    11: 'J',
+    12: 'Q',
+    13: 'K',
+}
+
+
 class Card:
     def __init__(self, number, suit):
         self.number = number
         self.suit = suit
 
+    @property
+    def face(self):
+        return face_map.get(self.number, self.number)
+
     def __str__(self):
-        return f'{self.number} {self.suit}'
+        return f'{self.face}{self.suit}'
 
     def __repr__(self):
         return str(self)

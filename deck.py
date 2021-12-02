@@ -17,8 +17,6 @@ class Deck:
         random.shuffle(self.cards)
 
     def deal_to_player(self, player):
-        print(player)
         for _ in range(6):
             card = self.cards.pop(0)
             player.add_to_hand(card)
-            print(card)
