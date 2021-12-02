@@ -10,19 +10,27 @@ class Round:
     def discard_to_crib(self, player):
         self.crib.extend(player.discard_to_crib())
 
+    @property
+    def players_have_cards(self):
+        for player in self.players:
+            if player.hand_count:
+                return True
+        return False
+
     def play_cards(self):
-        count = 0
-        while count <= 31:
-            card_played = False
-            for player in self.players:
-                card = player.play_card(current_count=count)
-                if card is None:
-                    continue
-                count += card.value
-                card_played = True
-                print(card, count)
-            if not card_played:
-                break
+        while self.players_have_cards:
+            count = 0
+            while count <= 31:
+                card_played = False
+                for player in self.players:
+                    card = player.play_card(current_count=count)
+                    if card is None:
+                        continue
+                    count += card.value
+                    card_played = True
+                    print(card, count)
+                if not card_played:
+                    break
 
     def start(self):
         print('Starting round')

@@ -2,6 +2,11 @@ class ComputerPlayer:
     def __init__(self):
         self.hand = []
 
+    @property
+    def hand_count(self):
+        print(self, len(self.hand))
+        return len(self.hand)
+
     def add_to_hand(self, card):
         self.hand.append(card)
 
