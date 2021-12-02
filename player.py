@@ -11,3 +11,10 @@ class ComputerPlayer:
             self.hand.pop(0),
         ]
         return cards
+
+    def play_card(self, current_count):
+        self.hand.sort(reverse=True)
+        for card in self.hand:
+            if card.value + current_count <= 31:
+                self.hand.remove(card)
+                return card

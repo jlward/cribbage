@@ -8,3 +8,12 @@ class Card:
 
     def __repr__(self):
         return str(self)
+
+    def __lt__(self, other):
+        return self.value < other.value
+
+    @property
+    def value(self):
+        if self.number > 10:
+            return 10
+        return self.number
