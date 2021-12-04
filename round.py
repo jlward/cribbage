@@ -9,6 +9,7 @@ class Round:
         self.players = players
         self.deck = Deck()
         self.crib = []
+        self.cards_played = []
 
     def discard_to_crib(self, player):
         self.crib.extend(player.discard_to_crib())
@@ -36,12 +37,23 @@ class Round:
                     count += card.value
                     card_played = True
                     print(player, card, count)
+                    self.cards_played.append((card, player))
+                    self.check_for_pegging()
                 if not card_played:
                     break
 
     def print_players(self):
         for player in self.players:
             print(player)
+
+    def check_for_pegging(self):
+        count = sum(card.value for (card, _) in self.cards_played)
+        if count == 15:
+            _, player = self.cards_played[-1]
+            player.add_points(2)
+        if count == 31:
+            _, player = self.cards_played[-1]
+            player.add_points(2)
 
     def score_hands(self):
         for player in self.players:
