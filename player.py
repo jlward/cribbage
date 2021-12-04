@@ -27,7 +27,7 @@ class ComputerPlayer:
     def add_points(self, points):
         self.score += points
         if self.score >= 121:
-            raise PlayerWon()
+            raise PlayerWon(self)
 
     def discard_to_crib(self):
         cards = [

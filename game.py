@@ -24,7 +24,8 @@ class Game:
         try:
             while True:
                 self.start_round()
-        except PlayerWon:
-            pass
+        except PlayerWon as e:
+            winner = e.player
         for player in self.players:
             print(player)
+        return winner
