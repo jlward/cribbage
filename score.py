@@ -68,6 +68,7 @@ class Score:
         return 0
 
     def score_hand(self):
+        print(self.cards, self.cut_card)
         points = 0
         points_from_run = self.check_for_straight()
         print('points_from_run', points_from_run)
