@@ -1,4 +1,5 @@
 import random
+
 from card import Card
 
 
@@ -7,10 +8,12 @@ class Deck:
         self.cards = []
         for number in range(1, 14):
             for suit in '♣♦♥♠':
-                self.cards.append(Card(
-                    number=number,
-                    suit=suit,
-                ))
+                self.cards.append(
+                    Card(
+                        number=number,
+                        suit=suit,
+                    ),
+                )
         self.shuffle()
 
     def shuffle(self):

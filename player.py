@@ -1,6 +1,7 @@
-from more_itertools import consecutive_groups
 import itertools
 from collections import Counter
+
+from more_itertools import consecutive_groups
 
 
 class ComputerPlayer:
@@ -40,10 +41,10 @@ class ComputerPlayer:
     def check_for_straight(self, cards):
         numbers = set(card.number for card in cards)
         numbers = sorted(list(numbers))
-        biggest_run = max([
-            list(group)
-            for group in consecutive_groups(numbers)
-        ], key=len)
+        biggest_run = max(
+            [list(group) for group in consecutive_groups(numbers)],
+            key=len,
+        )
         len_biggest_run = len(biggest_run)
         if len_biggest_run < 3:
             return 0
