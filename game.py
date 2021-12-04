@@ -10,6 +10,10 @@ class Game:
     def start_round(self):
         for player in self.players:
             player.reset_hand()
+
+        player = self.players.pop(0)
+        self.players.append(player)
+
         _round = Round(
             players=self.players,
         )

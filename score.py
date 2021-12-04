@@ -5,9 +5,10 @@ from more_itertools import consecutive_groups
 
 
 class Score:
-    def __init__(self, cards, cut_card):
+    def __init__(self, cards, cut_card, is_crib=False):
         self.cards = cards
         self.cut_card = cut_card
+        self.is_crib = True
 
     def check_for_straight(self):
         cards = self.cards + [self.cut_card]
@@ -51,6 +52,11 @@ class Score:
         return len(fifteens) * 2
 
     def check_for_flush(self):
+        if self.is_crib:
+            suits = set([card.suit for card in self.cards + [self.cut_card]])
+            if len(suits) == 1:
+                return 5
+            return 0
         suits = [card.suit for card in self.cards]
         points = 0
         if len(set(suits)) != 1:

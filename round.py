@@ -1,6 +1,7 @@
 import random
 
 from deck import Deck
+from score import Score
 
 
 class Round:
@@ -47,7 +48,12 @@ class Round:
             player.score_hand(self.cut_card)
 
     def count_crib(self):
-        pass
+        score = Score(
+            cards=self.crib,
+            cut_card=self.cut_card,
+            is_crib=True,
+        )
+        self.players[0].add_points(score.score_hand())
 
     def start(self):
         print('Starting round')
