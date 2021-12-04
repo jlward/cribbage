@@ -8,7 +8,7 @@ class Score:
     def __init__(self, cards, cut_card, is_crib=False):
         self.cards = cards
         self.cut_card = cut_card
-        self.is_crib = True
+        self.is_crib = is_crib
 
     def check_for_straight(self):
         cards = self.cards + [self.cut_card]
