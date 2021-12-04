@@ -37,8 +37,8 @@ class Round:
                     count += card.value
                     card_played = True
                     print(player, card, count)
-                    self.cards_played.append((card, player))
-                    self.check_for_pegging()
+                    self.cards_played.append(card)
+                    self.check_for_pegging(player)
                 if not card_played:
                     break
 
@@ -46,13 +46,11 @@ class Round:
         for player in self.players:
             print(player)
 
-    def check_for_pegging(self):
-        count = sum(card.value for (card, _) in self.cards_played)
+    def check_for_pegging(self, player):
+        count = sum(card.value for card in self.cards_played)
         if count == 15:
-            _, player = self.cards_played[-1]
             player.add_points(2)
         if count == 31:
-            _, player = self.cards_played[-1]
             player.add_points(2)
 
     def score_hands(self):
