@@ -1,17 +1,15 @@
-from player import ComputerPlayer
+from exceptions import PlayerWon
 from round import Round
 
 
 class Game:
-    def __init__(self):
+    def __init__(self, players):
         self.rounds = []
-        self.players = []
-
-    def create_players(self):
-        self.players.append(ComputerPlayer(name='Jason'))
-        self.players.append(ComputerPlayer(name='Zack'))
+        self.players = players
 
     def start_round(self):
+        for player in self.players:
+            player.reset_hand()
         _round = Round(
             players=self.players,
         )
@@ -19,5 +17,10 @@ class Game:
         self.rounds.append(_round)
 
     def run(self):
-        self.create_players()
-        self.start_round()
+        try:
+            while True:
+                self.start_round()
+        except PlayerWon:
+            pass
+        for player in self.players:
+            print(player)

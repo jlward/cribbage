@@ -1,0 +1,2 @@
+class PlayerWon(Exception):
+    pass

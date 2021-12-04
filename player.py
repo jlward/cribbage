@@ -1,3 +1,4 @@
+from exceptions import PlayerWon
 from score import Score
 
 
@@ -15,9 +16,18 @@ class ComputerPlayer:
     def hand_count(self):
         return len(self.hand)
 
+    def reset_hand(self):
+        self.hand = []
+        self.hand_copy = []
+
     def add_to_hand(self, card):
         self.hand.append(card)
         self.hand_copy.append(card)
+
+    def add_points(self, points):
+        self.score += points
+        if self.score >= 121:
+            raise PlayerWon()
 
     def discard_to_crib(self):
         cards = [
@@ -42,5 +52,5 @@ class ComputerPlayer:
             cut_card=cut_card,
         )
         points = score.score_hand()
-        self.score += points
+        self.add_points(points)
         return points
