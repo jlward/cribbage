@@ -12,6 +12,9 @@ class ComputerPlayer:
     def __str__(self):
         return f'{self.name} {self.hand} {self.score}'
 
+    def __repr__(self):
+        return str(self)
+
     @property
     def hand_count(self):
         return len(self.hand)

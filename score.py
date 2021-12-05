@@ -74,26 +74,20 @@ class ScoreHand:
         return 0
 
     def score_hand(self):
-        print(self.cards, self.cut_card)
         points = 0
         points_from_run = self.check_for_straight()
-        print('points_from_run', points_from_run)
         points += points_from_run
 
         points_from_pairs = self.check_for_pairs()
-        print('points_from_pairs', points_from_pairs)
         points += points_from_pairs
 
         points_from_15s = self.check_for_15s()
-        print('points_from_15s', points_from_15s)
         points += points_from_15s
 
         points_from_flush = self.check_for_flush()
-        print('points_from_flush', points_from_flush)
         points += points_from_flush
 
         points_from_nobs = self.check_for_nobs()
-        print('points_from_nobs', points_from_nobs)
         points += points_from_nobs
 
         return points

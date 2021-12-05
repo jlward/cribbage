@@ -26,6 +26,5 @@ class Game:
                 self.start_round()
         except PlayerWon as e:
             winner = e.player
-        for player in self.players:
-            print(player)
+        print(self.players)
         return winner

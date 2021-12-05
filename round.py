@@ -38,15 +38,11 @@ class Round:
                         continue
                     count += card.value
                     card_played = True
-                    print(player, card, count)
+                    print('    ', player.name, card, count)
                     self.cards_played.append(card)
                     self.check_for_pegging(player)
                 if not card_played:
                     break
-
-    def print_players(self):
-        for player in self.players:
-            print(player)
 
     def check_for_pegging(self, player):
         score = ScorePegging(self.cards_played)
@@ -67,16 +63,15 @@ class Round:
     def start(self):
         print('Starting round')
 
-        print('Dealing cards')
+        print('  Dealing cards')
         for player in self.players:
             self.deck.deal_to_player(player)
 
         for player in self.players:
             self.discard_to_crib(player)
+        print(' ', self.players)
 
         self.get_cut_card()
         self.play_cards()
         self.score_hands()
-        self.print_players()
         self.count_crib()
-        self.print_players()
