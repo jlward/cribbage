@@ -121,12 +121,12 @@ class ScorePegging:
                 break
         return num_pairs * (num_pairs - 1)
 
-    def _check_for_straight(self, cards):
-        current = cards[0].value
-        for card in cards[1:]:
-            if current + 1 != card.value:
+    def _check_for_straight(self, numbers):
+        current = numbers[0]
+        for number in numbers[1:]:
+            if current + 1 != number:
                 return False
-            current = card.value
+            current = number
         return True
 
     def check_for_straight_points(self):
@@ -135,12 +135,12 @@ class ScorePegging:
         last_cards = []
         longest_straight = 0
         for card in self.cards_played[::-1]:
-            last_cards.append(card)
+            last_cards.append(card.number)
             if len(last_cards) < 3:
                 continue
             last_cards.sort()
             if not self._check_for_straight(last_cards):
-                break
+                continue
             longest_straight = len(last_cards)
         return longest_straight
 
