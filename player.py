@@ -1,3 +1,5 @@
+import random
+
 from exceptions import PlayerWon
 from score import ScoreHand
 
@@ -32,6 +34,41 @@ class ComputerPlayer:
         if self.score >= 121:
             raise PlayerWon(self)
 
+    def score_hand(self, cut_card):
+        score = ScoreHand(
+            cards=self.hand_copy,
+            cut_card=cut_card,
+        )
+        points = score.score_hand()
+        self.add_points(points)
+        return points
+
+    def discard_to_crib(self):
+        raise NotImplementedError()
+
+    def play_card(self, current_count):
+        raise NotImplementedError()
+
+
+class Dumbass(ComputerPlayer):
+    def discard_to_crib(self):
+        cards = [
+            self.hand.pop(0),
+            self.hand.pop(0),
+        ]
+        for card in cards:
+            self.hand_copy.remove(card)
+        return cards
+
+    def play_card(self, current_count):
+        random.shuffle(self.hand)
+        for card in self.hand:
+            if card.value + current_count <= 31:
+                self.hand.remove(card)
+                return card
+
+
+class LessDumbass(ComputerPlayer):
     def discard_to_crib(self):
         cards = [
             self.hand.pop(0),
@@ -47,13 +84,3 @@ class ComputerPlayer:
             if card.value + current_count <= 31:
                 self.hand.remove(card)
                 return card
-
-    def score_hand(self, cut_card):
-        print(self)
-        score = ScoreHand(
-            cards=self.hand_copy,
-            cut_card=cut_card,
-        )
-        points = score.score_hand()
-        self.add_points(points)
-        return points

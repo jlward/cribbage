@@ -2,7 +2,7 @@ import argparse
 from collections import defaultdict
 
 from game import Game
-from player import ComputerPlayer
+from player import Dumbass, LessDumbass
 
 
 def main():
@@ -17,8 +17,8 @@ def main():
     print('Running game')
     winners = defaultdict(int)
     for _ in range(args.num_games):
-        jason = ComputerPlayer(name='Jason')
-        zack = ComputerPlayer(name='Zack')
+        jason = LessDumbass(name='Jason')
+        zack = Dumbass(name='Zack')
         game = Game(players=[jason, zack])
         player = game.run()
         winners[player.name] += 1
