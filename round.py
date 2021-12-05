@@ -1,7 +1,7 @@
 import random
 
 from deck import Deck
-from score import Score
+from score import ScoreHand
 
 
 class Round:
@@ -104,7 +104,7 @@ class Round:
             player.score_hand(self.cut_card)
 
     def count_crib(self):
-        score = Score(
+        score = ScoreHand(
             cards=self.crib,
             cut_card=self.cut_card,
             is_crib=True,

@@ -4,7 +4,7 @@ from collections import Counter
 from more_itertools import consecutive_groups
 
 
-class Score:
+class ScoreHand:
     def __init__(self, cards, cut_card, is_crib=False):
         self.cards = cards
         self.cut_card = cut_card

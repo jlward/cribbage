@@ -1,5 +1,5 @@
 from exceptions import PlayerWon
-from score import Score
+from score import ScoreHand
 
 
 class ComputerPlayer:
@@ -47,7 +47,7 @@ class ComputerPlayer:
 
     def score_hand(self, cut_card):
         print(self)
-        score = Score(
+        score = ScoreHand(
             cards=self.hand_copy,
             cut_card=cut_card,
         )
