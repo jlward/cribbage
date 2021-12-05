@@ -97,3 +97,61 @@ class ScoreHand:
         points += points_from_nobs
 
         return points
+
+
+class ScorePegging:
+    def __init__(self, cards_played):
+        self.cards_played = cards_played
+
+    def check_for_magic_numbers(self):
+        count = sum(card.value for card in self.cards_played)
+        if count == 15:
+            return True
+        if count == 31:
+            return True
+        return False
+
+    def check_for_pair_points(self):
+        last_card = self.cards_played[-1]
+        num_pairs = 1
+        for card in self.cards_played[-2::-1]:
+            if card == last_card:
+                num_pairs += 1
+            else:
+                break
+        return num_pairs * (num_pairs - 1)
+
+    def _check_for_straight(self, cards):
+        current = cards[0].value
+        for card in cards[1:]:
+            if current + 1 != card.value:
+                return False
+            current = card.value
+        return True
+
+    def check_for_straight_points(self):
+        if len(self.cards_played) < 3:
+            return 0
+        last_cards = []
+        longest_straight = 0
+        for card in self.cards_played[::-1]:
+            last_cards.append(card)
+            if len(last_cards) < 3:
+                continue
+            last_cards.sort()
+            if not self._check_for_straight(last_cards):
+                break
+            longest_straight = len(last_cards)
+        return longest_straight
+
+    def score(self):
+        points = 0
+        if self.check_for_magic_numbers():
+            points += 2
+        pair_points = self.check_for_pair_points()
+        if pair_points:
+            points += pair_points
+        straight_points = self.check_for_straight_points()
+        if straight_points:
+            points += straight_points
+        return points
