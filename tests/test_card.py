@@ -23,3 +23,6 @@ class CardTestCase(TestCase):
     def test_card_can_be_check_for_less_than(self):
         card = Card(number=2, suit='a')
         assert card > self.card
+
+    def test_card_equality(self):
+        self.assertEqual(self.card, Card(number=1, suit='b'))
