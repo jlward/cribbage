@@ -145,6 +145,13 @@ class ScoreHandTestCase(TestCase):
 
 
 class ScorePeggingTestCase(TestCase):
+    def assert_round(self, cards):
+        stack = []
+        for number, expected_points in cards:
+            stack.append(Card(number=number, suit='a'))
+            score = ScorePegging(stack)
+            self.assertEqual(score.score(), expected_points)
+
     def test_magic_numbers_15(self):
         cards = [
             Card(number=10, suit='a'),
@@ -226,11 +233,7 @@ class ScorePeggingTestCase(TestCase):
             (10, 0),
             (6, 2),
         ]
-        stack = []
-        for number, expected_points in cards:
-            stack.append(Card(number=number, suit='a'))
-            score = ScorePegging(stack)
-            self.assertEqual(score.score(), expected_points)
+        self.assert_round(cards)
 
     def test_score_pairs(self):
         cards = [
@@ -238,11 +241,7 @@ class ScorePeggingTestCase(TestCase):
             (10, 2),
             (10, 6),
         ]
-        stack = []
-        for number, expected_points in cards:
-            stack.append(Card(number=number, suit='a'))
-            score = ScorePegging(stack)
-            self.assertEqual(score.score(), expected_points)
+        self.assert_round(cards)
 
     def test_score_striaghts(self):
         cards = [
@@ -253,8 +252,20 @@ class ScorePeggingTestCase(TestCase):
             (6, 0),
             (4, 6),
         ]
-        stack = []
-        for number, expected_points in cards:
-            stack.append(Card(number=number, suit='a'))
-            score = ScorePegging(stack)
-            self.assertEqual(score.score(), expected_points)
+        self.assert_round(cards)
+
+    def test_score_fifteen_with_pair(self):
+        cards = [
+            (5, 0),
+            (5, 2),
+            (5, 8),
+        ]
+        self.assert_round(cards)
+
+    def test_score_fifteen_with_straight(self):
+        cards = [
+            (4, 0),
+            (5, 0),
+            (6, 5),
+        ]
+        self.assert_round(cards)
